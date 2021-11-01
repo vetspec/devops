@@ -110,13 +110,13 @@ if [ -f /var/www/localhost/htdocs/auto_configure.php ] &&
    [ "$EASY_DEV_MODE_NEW" != "yes" ]; then
     echo "Configuring a new flex openemr docker"
     if [ "$FLEX_REPOSITORY" == "" ]; then
-        echo "Missing FLEX_REPOSITORY environment setting, so using https://github.com/openemr/openemr.git"
-        FLEX_REPOSITORY="https://github.com/openemr/openemr.git"
+        echo "Missing FLEX_REPOSITORY environment setting, so using https://github.com/providencehealthtech/polaris.git"
+        FLEX_REPOSITORY="https://github.com/providencehealthtech/polaris.git"
     fi
     if [ "$FLEX_REPOSITORY_BRANCH" == "" ] &&
        [ "$FLEX_REPOSITORY_TAG" == "" ]; then
-        echo "Missing FLEX_REPOSITORY_BRANCH or FLEX_REPOSITORY_TAG environment setting, so using FLEX_REPOSITORY_BRANCH setting of master"
-        FLEX_REPOSITORY_BRANCH="master"
+        echo "Missing FLEX_REPOSITORY_BRANCH or FLEX_REPOSITORY_TAG environment setting, so using FLEX_REPOSITORY_BRANCH setting of main"
+        FLEX_REPOSITORY_BRANCH="main"
     fi
 
     cd /
@@ -370,11 +370,6 @@ if [ "$XDEBUG_IDE_KEY" != "" ] ||
    [ "$XDEBUG_ON" == 1 ]; then
    sh xdebug.sh
 fi
-
-echo ""
-echo "Love OpenEMR? You can now support the project via the open collective:"
-echo " > https://opencollective.com/openemr/donate"
-echo ""
 
 if [ "$OPERATOR" == "yes" ]; then
     echo "Starting apache!"

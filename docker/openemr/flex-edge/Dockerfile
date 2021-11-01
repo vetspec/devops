@@ -26,7 +26,9 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin -
 #  since npm package libxmljs needs to be built during openemr build; this is part of the ccda npm build and
 #  can place build-base in below apk del line when this issue is fixed)
 #  btw, when this is fixed and we apk del build-base, this will decrease size of docker by 190MB :)
+ARG git_token
 RUN apk add --no-cache build-base libffi-dev python3-dev cargo \
+    && git config --global url."https://${git_token}@github.com/".insteadOf "https://github.com" \
     && mkdir -p /var/www/localhost/htdocs/openemr/sites \
     && chown -R apache /var/www/localhost/htdocs/openemr \
     && git clone https://github.com/letsencrypt/letsencrypt --depth 1 /opt/certbot \

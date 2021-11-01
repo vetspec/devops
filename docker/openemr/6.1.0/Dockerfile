@@ -20,8 +20,11 @@ RUN cp /usr/bin/php8 /usr/bin/php
 # Install composer for openemr package building
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
 
+ARG git_token
 RUN apk add --no-cache git build-base libffi-dev python3-dev cargo \
-    && git clone https://github.com/openemr/openemr.git --depth 1 \
+    && git config --global url."https://${git_token}@github.com/".insteadOf "https://github.com" \
+    && git clone https://github.com/providencehealthtech/polaris.git --depth 1 openemr \
+    && git config --global url."https://github.com".insteadOf "https://${git_token}@github.com" \
     && rm -rf openemr/.git \
     && cd openemr \
     && composer install --no-dev \
